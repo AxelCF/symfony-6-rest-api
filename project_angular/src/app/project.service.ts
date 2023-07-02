@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface Project {
+  isUpdating: boolean;
   id: number;
   name: string;
   description: string;
@@ -19,11 +20,14 @@ export class ProjectService {
   constructor(private http: HttpClient) { }
 
   getProjects(): Observable<Project[]> {
-    const headers = new HttpHeaders(); // Créez une instance de HttpHeaders
+    const headers = new HttpHeaders();
 
-    return this.http.get<Project[]>('api/' + 'projects', { headers: headers })
-      .pipe(map(res => res));
-    
+    return this.http.get<Project[]>('api/projects', { headers: headers });
+  }
+
+  addProject(project: Project): Observable<Project> {
+    const headers = new HttpHeaders();
+
+    return this.http.post<Project>('/api/projects', project, { headers: headers });
   }
 }
-

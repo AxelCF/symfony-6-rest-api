@@ -36,4 +36,8 @@ export class ProjectListComponent implements OnInit {
       )
       .subscribe();
   }
+  appendProject(project: Project) {
+    this.projects.push(project);
+  }
+  
 }
