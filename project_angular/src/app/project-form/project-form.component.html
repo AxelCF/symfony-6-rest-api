@@ -1,7 +1,8 @@
 <span class="help is-danger">{{ errors }}</span>
 <div class="field">
   <div class="control">
-    <input class="input" #projectName (keydown)="errors = ''" />
+    <input class="input" #projectName (keydown)="errors = ''" required />
+    <input class="input" #projectDescription (keydown)="errors = ''" required />
   </div>
 </div>
 <button

@@ -22,12 +22,12 @@ export class ProjectService {
   getProjects(): Observable<Project[]> {
     const headers = new HttpHeaders();
 
-    return this.http.get<Project[]>('api/projects', { headers: headers });
+    return this.http.get<Project[]>(API_URL + '/api/projects', { headers: headers });
   }
 
   addProject(project: Project): Observable<Project> {
     const headers = new HttpHeaders();
 
-    return this.http.post<Project>('/api/projects', project, { headers: headers });
+    return this.http.post<Project>(API_URL, project, { headers: headers });
   }
 }

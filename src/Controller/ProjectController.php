@@ -34,25 +34,32 @@ class ProjectController extends AbstractController
  
  
     #[Route('/projects', name: 'project_create', methods:['post'] )]
-    public function create(ManagerRegistry $doctrine, Request $request): JsonResponse
-    {
-        $entityManager = $doctrine->getManager();
-   
-        $project = new Project();
-        $project->setName($request->request->get('name'));
-        $project->setDescription($request->request->get('description'));
-   
-        $entityManager->persist($project);
-        $entityManager->flush();
-   
-        $data =  [
-            'id' => $project->getId(),
-            'name' => $project->getName(),
-            'description' => $project->getDescription(),
-        ];
-           
-        return $this->json($data);
+public function create(ManagerRegistry $doctrine, Request $request): JsonResponse
+{
+    $entityManager = $doctrine->getManager();
+
+    $name = $request->request->get('name');
+    $description = $request->request->get('description');
+
+    if (!isset($name)) {
+        return $this->json('Name is required', 400);
     }
+
+    $project = new Project();
+    $project->setName($name);
+    $project->setDescription($description);
+
+    $entityManager->persist($project);
+    $entityManager->flush();
+
+    $data =  [
+        'id' => $project->getId(),
+        'name' => $project->getName(),
+        'description' => $project->getDescription(),
+    ];
+
+    return $this->json($data);
+}
  
  
     #[Route('/projects/{id}', name: 'project_show', methods:['get'] )]

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Project, ProjectService } from '../project.service';
 import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import 'tslib';
+
 
 @Component({
   selector: 'app-project-list',
